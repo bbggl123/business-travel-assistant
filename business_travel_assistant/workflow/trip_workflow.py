@@ -1,6 +1,7 @@
 from typing import Dict, Any
 from business_travel_assistant.models.trip_state import TripState, WorkflowStatus, IntentType
 from business_travel_assistant.agents.intent_classification_agent import IntentClassificationAgent
+from business_travel_assistant.agents.enhanced_intent_classification_agent import EnhancedIntentClassificationAgent
 from business_travel_assistant.agents.information_collection_agent import InformationCollectionAgent
 from business_travel_assistant.agents.trip_planning_agent import TripPlanningAgent
 from business_travel_assistant.agents.budget_estimation_agent import BudgetEstimationAgent
@@ -8,8 +9,8 @@ from business_travel_assistant.agents.approval_generation_agent import ApprovalG
 
 
 class TripWorkflow:
-    def __init__(self):
-        self.intent_agent = IntentClassificationAgent()
+    def __init__(self, use_enhanced_nlu: bool = True):
+        self.intent_agent = EnhancedIntentClassificationAgent() if use_enhanced_nlu else IntentClassificationAgent()
         self.collection_agent = InformationCollectionAgent()
         self.planning_agent = TripPlanningAgent()
         self.budget_agent = BudgetEstimationAgent()
